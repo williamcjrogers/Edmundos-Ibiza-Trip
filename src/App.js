@@ -144,7 +144,9 @@ const IbizaItinerary = () => {
       gap: '0.5rem',
       padding: '1.5rem',
       background: 'rgba(43, 24, 16, 0.3)',
-      borderBottom: '1px solid rgba(201, 148, 58, 0.3)'
+      borderBottom: '1px solid rgba(201, 148, 58, 0.3)',
+      overflowX: 'auto',
+      WebkitOverflowScrolling: 'touch'
     },
     dayButton: {
       flex: 1,
@@ -155,19 +157,20 @@ const IbizaItinerary = () => {
       transition: 'all 0.3s ease',
       textAlign: 'center',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      minWidth: '160px'
     },
     dayButtonActive: {
       border: '2px solid #C9943A',
       boxShadow: '0 4px 20px rgba(201, 148, 58, 0.3)'
     },
     content: {
-      padding: '2rem',
+      padding: '1.25rem',
       maxWidth: '1200px',
       margin: '0 auto'
     },
     dayHeader: {
-      padding: '2rem',
+      padding: '1.25rem',
       borderRadius: '12px',
       marginBottom: '2rem',
       position: 'relative',
@@ -175,7 +178,7 @@ const IbizaItinerary = () => {
       boxShadow: '0 10px 40px rgba(0,0,0,0.4)'
     },
     dayTitle: {
-      fontSize: '2rem',
+      fontSize: '1.5rem',
       fontWeight: '600',
       marginBottom: '0.5rem',
       color: '#F4E6D3',
@@ -185,17 +188,17 @@ const IbizaItinerary = () => {
     },
     eventsGrid: {
       display: 'grid',
-      gap: '1rem',
-      marginBottom: '2rem'
+      gap: '0.75rem',
+      marginBottom: '1.25rem'
     },
     eventCard: {
       background: 'rgba(43, 24, 16, 0.4)',
       backdropFilter: 'blur(10px)',
       border: '1px solid rgba(201, 148, 58, 0.2)',
       borderRadius: '12px',
-      padding: '1.5rem',
+      padding: '1rem',
       display: 'flex',
-      gap: '1rem',
+      gap: '0.75rem',
       alignItems: 'center',
       transition: 'all 0.3s ease',
       cursor: 'pointer',
@@ -209,12 +212,12 @@ const IbizaItinerary = () => {
     },
     timeBox: {
       background: 'rgba(201, 148, 58, 0.2)',
-      padding: '0.5rem 1rem',
+      padding: '0.4rem 0.7rem',
       borderRadius: '8px',
-      fontSize: '0.85rem',
+      fontSize: '0.8rem',
       fontWeight: '600',
       color: '#C9943A',
-      minWidth: '100px',
+      minWidth: '80px',
       textAlign: 'center'
     },
     iconBox: {
@@ -230,7 +233,7 @@ const IbizaItinerary = () => {
     opsSection: {
       background: 'rgba(74, 44, 26, 0.2)',
       borderRadius: '12px',
-      padding: '1.5rem',
+      padding: '1rem',
       border: '1px solid rgba(212, 184, 150, 0.3)'
     },
     opsHeader: {
@@ -268,7 +271,7 @@ const IbizaItinerary = () => {
       display: 'flex',
       alignItems: 'center',
       gap: '1rem',
-      padding: '0.75rem',
+      padding: '0.6rem',
       background: 'rgba(43, 24, 16, 0.3)',
       borderRadius: '8px',
       fontSize: '0.9rem',

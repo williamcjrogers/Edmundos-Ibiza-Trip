@@ -54,17 +54,19 @@ export default function DocumentUpload() {
 
 	const styles = {
 		container: {
-			marginTop: '2rem',
+			marginTop: '1.25rem',
 			background: 'rgba(43, 24, 16, 0.35)',
 			border: '1px solid rgba(201, 148, 58, 0.25)',
 			borderRadius: '12px',
-			padding: '1.25rem'
+			padding: '1rem'
 		},
 		header: {
 			display: 'flex',
+			flexWrap: 'wrap',
+			rowGap: '0.75rem',
 			justifyContent: 'space-between',
 			alignItems: 'center',
-			marginBottom: '1rem'
+			marginBottom: '0.75rem'
 		},
 		title: {
 			display: 'flex',
@@ -92,21 +94,21 @@ export default function DocumentUpload() {
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'space-between',
-			gap: '1rem',
-			padding: '0.75rem 0.9rem',
+			gap: '0.75rem',
+			padding: '0.7rem 0.8rem',
 			background: 'rgba(43, 24, 16, 0.3)',
 			border: '1px solid rgba(201, 148, 58, 0.2)',
 			borderRadius: '8px'
 		},
-		left: { display: 'flex', alignItems: 'center', gap: '0.75rem' },
-		name: { color: '#F4E6D3', fontWeight: 600 },
+		left: { display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0 },
+		name: { color: '#F4E6D3', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '56vw' },
 		meta: { color: '#D4B896', fontSize: '0.8rem' },
 		actions: { display: 'flex', alignItems: 'center', gap: '0.5rem' },
 		actionBtn: {
 			background: 'transparent',
 			border: '1px solid rgba(201, 148, 58, 0.35)',
 			color: '#C9943A',
-			padding: '0.35rem 0.6rem',
+			padding: '0.5rem 0.7rem',
 			borderRadius: '6px',
 			cursor: 'pointer'
 		},

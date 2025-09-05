@@ -5,11 +5,23 @@ export default function Login({ onSuccess }) {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 
+	function normalizeInput(value) {
+		if (!value) return '';
+		// Replace smart quotes/apostrophes/backticks with straight apostrophe
+		const unified = value
+			.replace(/[\u2018\u2019\u02BC\u2032\u201B\u00B4\u0060]/g, "'")
+			.replace(/\s+/g, ' ')
+			.trim();
+		return unified;
+	}
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		const validUser = "IBIZAVIP'S";
 		const validPass = 'LEGENDS';
-		if (username === validUser && password === validPass) {
+		const normalizedUser = normalizeInput(username).toUpperCase();
+		const normalizedPass = normalizeInput(password);
+		if (normalizedUser === validUser.toUpperCase() && normalizedPass === validPass) {
 			localStorage.setItem('isAuthenticated', 'true');
 			onSuccess?.();
 		} else {
@@ -45,23 +57,23 @@ export default function Login({ onSuccess }) {
 		label: { display: 'block', marginBottom: '0.35rem', color: '#D4B896' },
 		input: {
 			width: '100%',
-			padding: '0.6rem 0.8rem',
+			padding: '0.8rem 0.9rem',
 			borderRadius: '8px',
 			border: '1px solid rgba(201, 148, 58, 0.35)',
 			background: 'rgba(43, 24, 16, 0.35)',
 			color: '#F4E6D3',
-			marginBottom: '0.8rem'
+			marginBottom: '1rem'
 		},
 		button: {
 			width: '100%',
-			padding: '0.7rem 1rem',
+			padding: '0.9rem 1rem',
 			borderRadius: '8px',
 			border: '1px solid #C9943A',
 			background: 'rgba(201, 148, 58, 0.2)',
 			color: '#C9943A',
 			fontWeight: 600,
 			cursor: 'pointer',
-			marginTop: '0.4rem'
+			marginTop: '0.6rem'
 		},
 		error: { color: '#E7B77A', marginTop: '0.5rem', fontSize: '0.9rem' }
 	};
@@ -71,9 +83,29 @@ export default function Login({ onSuccess }) {
 			<form style={styles.card} onSubmit={handleSubmit}>
 				<div style={styles.title}>Edmundos - Ibiza Escape</div>
 				<label style={styles.label} htmlFor="username">Username</label>
-				<input id="username" style={styles.input} value={username} onChange={e => setUsername(e.target.value)} />
+				<input
+					id="username"
+					style={styles.input}
+					value={username}
+					onChange={e => setUsername(e.target.value)}
+					autoCapitalize="none"
+					autoCorrect="off"
+					spellCheck={false}
+					inputMode="text"
+					autoComplete="username"
+				/>
 				<label style={styles.label} htmlFor="password">Password</label>
-				<input id="password" type="password" style={styles.input} value={password} onChange={e => setPassword(e.target.value)} />
+				<input
+					id="password"
+					type="password"
+					style={styles.input}
+					value={password}
+					onChange={e => setPassword(e.target.value)}
+					autoCapitalize="none"
+					autoCorrect="off"
+					spellCheck={false}
+					autoComplete="current-password"
+				/>
 				<button type="submit" style={styles.button}>Log in</button>
 				{error && <div style={styles.error}>{error}</div>}
 			</form>
