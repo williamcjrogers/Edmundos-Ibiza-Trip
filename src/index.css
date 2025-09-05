@@ -22,7 +22,7 @@ code {
 	align-items: center;
 	justify-content: center;
 	pointer-events: none;
-	animation: overlay-fade 6.5s ease forwards;
+	animation: overlay-fade 5s ease forwards;
 }
 
 .cigar-path {
@@ -205,4 +205,36 @@ code {
 		0% { transform: translate3d(-50%, -50%, 0); opacity: 0.95; }
 		100% { transform: translate3d(calc(100vw - 200px - 50%), -50%, 0); opacity: 0.7; }
 	}
+}
+
+/* Intro overrides: center cigar, dramatic smoke, Havana band, clear EDMUNDOS */
+.cigar-path { width: 100vw; max-width: 960px; height: 240px; position: relative; }
+.cigar { left: 50%; top: 50%; transform: translate3d(-50%, -50%, 0); width: 640px; height: 88px; border-radius: 44px; box-shadow: inset 0 0 14px rgba(0,0,0,0.6), 0 20px 40px rgba(0,0,0,0.6); }
+.cigar-band.havana { left: 42%; width: 92px; height: 96px; border-radius: 14px; background: radial-gradient(circle at 50% 50%, rgba(210,0,0,0.98) 0%, rgba(150,0,0,0.98) 65%, rgba(90,0,0,0.98) 100%); border: 3px solid rgba(230,190,110,0.98); box-shadow: 0 0 12px rgba(201,148,58,0.5); }
+.cigar-name { left: 64%; top: 50%; transform: translate(-50%, -50%); font-size: 30px; letter-spacing: 0.2em; color: #EAD8A6; text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 0 10px rgba(201,148,58,0.45); }
+.cigar-ash { right: -18px; width: 28px; height: 56px; border-radius: 10px; }
+.ember { left: calc(50% + 320px); width: 32px; height: 32px; }
+.smoke { left: calc(50% + 280px); box-shadow:
+	0 0 0 0 rgba(200,200,200,0.0),
+	40px -50px 28px 16px rgba(200, 200, 200, 0.10),
+	100px -120px 38px 24px rgba(210, 210, 210, 0.12),
+	170px -200px 48px 30px rgba(230, 230, 230, 0.14);
+}
+.smoke2 { filter: blur(1.6px); opacity: 0.85; animation-duration: 6.2s; }
+.smoke3 { filter: blur(2.2px); opacity: 0.7; animation-duration: 7s; }
+.smoke-cloud { left: calc(50% + 260px); width: 44px; height: 44px; }
+.cloud2 { width: 58px; height: 58px; left: calc(50% + 230px); }
+.cloud3 { width: 76px; height: 76px; left: calc(50% + 200px); }
+.smoke-haze { position: absolute; inset: 0; pointer-events: none; }
+.haze { position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(210,210,210,0.20), rgba(210,210,210,0.04) 45%, rgba(210,210,210,0) 70%); filter: blur(14px); }
+.layer2 { background: radial-gradient(circle at 30% 20%, rgba(220,220,220,0.16), rgba(220,220,220,0.04) 45%, rgba(220,220,220,0) 70%); filter: blur(18px); }
+
+@media (max-width: 640px) {
+	.cigar-path { height: 200px; }
+	.cigar { width: 86vw; height: 12vw; border-radius: 6vw; }
+	.cigar-band.havana { width: 16vw; height: 18vw; }
+	.cigar-name { font-size: 5vw; left: 66%; }
+	.ember { left: calc(50% + 42vw); width: 5vw; height: 5vw; }
+	.smoke { left: calc(50% + 38vw); }
+	.smoke-cloud { left: calc(50% + 36vw); }
 }
