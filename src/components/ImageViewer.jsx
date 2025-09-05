@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 export default function ImageViewer({ src, alt }) {
 	const containerRef = useRef(null);
@@ -10,14 +10,7 @@ export default function ImageViewer({ src, alt }) {
 	const lastTranslate = useRef({ x: 0, y: 0 });
 	const lastTouchDistance = useRef(null);
 	const lastScale = useRef(1);
-	const doubleTapTimeout = useRef(null);
 	const lastTap = useRef(0);
-
-	useEffect(() => {
-		return () => {
-			if (doubleTapTimeout.current) clearTimeout(doubleTapTimeout.current);
-		};
-	}, []);
 
 	function onWheel(e) {
 		e.preventDefault();
