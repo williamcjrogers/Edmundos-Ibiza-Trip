@@ -17,7 +17,7 @@ export default function Login({ onSuccess }) {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		const validUser = "IBIZAVIP'S";
+		const validUser = 'IBIZAVIP';
 		const validPass = 'LEGENDS';
 		const normalizedUser = normalizeInput(username).toUpperCase();
 		const normalizedPass = normalizeInput(password);
