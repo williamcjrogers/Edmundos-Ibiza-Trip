@@ -1,11 +1,12 @@
 // IbizaItinerary.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DocumentUpload from './DocumentUpload';
 import { Calendar, MapPin, Users, Clock, Plane, Music, Utensils, Ship, CheckCircle, AlertCircle, Sun, Moon, Wine, Activity, Anchor, Coffee, Star } from 'lucide-react';
 
 const IbizaItinerary = () => {
   const [activeDay, setActiveDay] = useState(0);
   const [showOpsNotes, setShowOpsNotes] = useState(false);
+  const [opsOverrides, setOpsOverrides] = useState({}); // key: `${dayIdx}:${opIdx}` -> status
 
   const tripData = {
     title: "Edmundos - Ibiza Escape",
@@ -298,6 +299,26 @@ const IbizaItinerary = () => {
   };
 
   const [hoveredEvent, setHoveredEvent] = useState(null);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('opsTasksV1');
+      if (saved) setOpsOverrides(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  function getOpStatus(dayIdx, opIdx) {
+    const key = `${dayIdx}:${opIdx}`;
+    return opsOverrides[key] || days[dayIdx].ops[opIdx].status;
+  }
+
+  function toggleOpStatus(dayIdx, opIdx) {
+    const key = `${dayIdx}:${opIdx}`;
+    const current = getOpStatus(dayIdx, opIdx);
+    const next = current === 'complete' ? 'pending' : 'complete';
+    const nextOverrides = { ...opsOverrides, [key]: next };
+    setOpsOverrides(nextOverrides);
+    try { localStorage.setItem('opsTasksV1', JSON.stringify(nextOverrides)); } catch {}
+  }
 
   return (
     <div style={styles.container}>
@@ -420,9 +441,11 @@ const IbizaItinerary = () => {
 
           {showOpsNotes && (
             <div style={styles.opsGrid}>
-              {days[activeDay].ops.map((op, index) => (
+              {days[activeDay].ops.map((op, index) => {
+                const status = getOpStatus(activeDay, index);
+                return (
                 <div key={index} style={styles.opsItem}>
-                  <CheckCircle size={16} style={{ color: op.status === 'complete' ? '#D4B896' : '#C9943A' }} />
+                  <CheckCircle size={16} style={{ color: status === 'complete' ? '#D4B896' : '#C9943A' }} />
                   <div style={{ flex: 1 }}>
                     <strong style={{ color: '#F4E6D3' }}>{op.task}</strong>
                     <span style={{ color: '#D4B896', marginLeft: '0.5rem' }}>— {op.owner}</span>
@@ -432,14 +455,17 @@ const IbizaItinerary = () => {
                       </div>
                     )}
                   </div>
-                  <div style={{
+                  <button onClick={() => toggleOpStatus(activeDay, index)} style={{
                     ...styles.statusBadge,
-                    ...(op.status === 'complete' ? styles.completeStatus : styles.pendingStatus)
+                    border: 'none',
+                    background: 'transparent',
+                    cursor: 'pointer',
+                    ...(status === 'complete' ? styles.completeStatus : styles.pendingStatus)
                   }}>
-                    {op.status}
-                  </div>
+                    {status}
+                  </button>
                 </div>
-              ))}
+              );})}
             </div>
           )}
         </div>
