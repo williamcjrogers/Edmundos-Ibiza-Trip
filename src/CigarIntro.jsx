@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function CigarIntro({ onFinish, durationMs = 6500 }) {
+export default function CigarIntro({ onFinish, durationMs = 5000 }) {
 	const [visible, setVisible] = useState(true);
 
 	useEffect(() => {
@@ -15,12 +15,15 @@ export default function CigarIntro({ onFinish, durationMs = 6500 }) {
 
 	return (
 		<div className="cigar-intro-overlay">
+			<div className="smoke-haze">
+				<div className="haze layer1" />
+				<div className="haze layer2" />
+			</div>
 			<div className="cigar-path">
 				<div className="cigar">
-					<div className="cigar-band">
-						<div className="cigar-band-label">EDMUNDOS</div>
-					</div>
 					<div className="cigar-wrapper-lines" />
+					<div className="cigar-band havana" />
+					<div className="cigar-name">EDMUNDOS</div>
 					<div className="cigar-ash" />
 				</div>
 				<div className="ember" />

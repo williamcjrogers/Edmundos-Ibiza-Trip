@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FileText, Trash2, Download, Plus, Loader2 } from 'lucide-react';
 import { addDocument, listDocuments, getDocument, deleteDocument } from './db';
+import ImageViewer from './components/ImageViewer';
+import PdfViewer from './components/PdfViewer';
 
 export default function DocumentUpload() {
 	const [documents, setDocuments] = useState([]);
@@ -200,7 +202,7 @@ export default function DocumentUpload() {
 			)}
 
 			{preview && (
-				<div style={styles.previewOverlay} onClick={closePreview}>
+				<div style={styles.previewOverlay} onClick={closePreview} onTouchStart={(e)=>{styles._touchStart={x:e.touches?.[0]?.clientX||0,y:e.touches?.[0]?.clientY||0}}} onTouchEnd={(e)=>{const dx=(e.changedTouches?.[0]?.clientX||0)-(styles._touchStart?.x||0); const dy=(e.changedTouches?.[0]?.clientY||0)-(styles._touchStart?.y||0); if(Math.hypot(dx,dy)>60){closePreview();}}}>
 					<div style={styles.previewCard} onClick={e => e.stopPropagation()}>
 						<div style={styles.previewHeader}>
 							<div>{preview.name}</div>
@@ -208,9 +210,9 @@ export default function DocumentUpload() {
 						</div>
 						<div style={styles.previewBody}>
 							{preview.type?.includes('pdf') ? (
-								<iframe title="Preview" src={preview.url} style={styles.previewMedia} />
+								<PdfViewer src={preview.url} />
 							) : preview.type?.startsWith('image/') ? (
-								<img alt={preview.name} src={preview.url} style={styles.previewMedia} />
+								<ImageViewer alt={preview.name} src={preview.url} />
 							) : (
 								<div style={{ padding: '1rem', color: '#D4B896' }}>
 									Preview not supported. <a href={preview.url} target="_blank" rel="noreferrer" style={{ color: '#C9943A' }}>Open in new tab</a>.
