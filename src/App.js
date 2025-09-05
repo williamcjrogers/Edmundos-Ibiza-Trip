@@ -1,7 +1,7 @@
 // IbizaItinerary.jsx
 import React, { useState } from 'react';
 import DocumentUpload from './DocumentUpload';
-import { Calendar, MapPin, Users, Clock, Plane, Music, Utensils, Ship, Sparkles, CheckCircle, AlertCircle, Sun, Moon, Wine, Activity, Anchor, Coffee, Star } from 'lucide-react';
+import { Calendar, MapPin, Users, Clock, Plane, Music, Utensils, Ship, CheckCircle, AlertCircle, Sun, Moon, Wine, Activity, Anchor, Coffee, Star } from 'lucide-react';
 
 const IbizaItinerary = () => {
   const [activeDay, setActiveDay] = useState(0);

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Upload, FileText, Trash2, Download, Plus, Loader2 } from 'lucide-react';
+import { FileText, Trash2, Download, Plus, Loader2 } from 'lucide-react';
 import { addDocument, listDocuments, getDocument, deleteDocument } from './db';
 
 export default function DocumentUpload() {
