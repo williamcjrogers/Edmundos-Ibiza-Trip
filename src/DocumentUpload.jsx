@@ -6,6 +6,7 @@ export default function DocumentUpload() {
 	const [documents, setDocuments] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isUploading, setIsUploading] = useState(false);
+	const [preview, setPreview] = useState(null); // { id, name, type, url }
 	const fileInputRef = useRef(null);
 
 	useEffect(() => {
@@ -50,6 +51,18 @@ export default function DocumentUpload() {
 		await deleteDocument(id);
 		const docs = await listDocuments();
 		setDocuments(docs);
+	}
+
+	async function handlePreview(id) {
+		const doc = await getDocument(id);
+		if (!doc) return;
+		const url = URL.createObjectURL(doc.blob);
+		setPreview({ id: doc.id, name: doc.name, type: doc.type, url });
+	}
+
+	function closePreview() {
+		if (preview?.url) URL.revokeObjectURL(preview.url);
+		setPreview(null);
 	}
 
 	const styles = {
@@ -112,7 +125,19 @@ export default function DocumentUpload() {
 			borderRadius: '6px',
 			cursor: 'pointer'
 		},
-		loader: { display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#C9943A' }
+		loader: { display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#C9943A' },
+		previewOverlay: {
+			position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', zIndex: 9998,
+			display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem'
+		},
+		previewCard: {
+			background: 'rgba(43,24,16,0.9)', border: '1px solid rgba(201,148,58,0.35)',
+			borderRadius: '10px', maxWidth: '92vw', maxHeight: '88vh', width: '900px', padding: '0.75rem'
+		},
+		previewHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', color: '#F4E6D3' },
+		closeBtn: { border: '1px solid rgba(201,148,58,0.5)', color: '#C9943A', background: 'transparent', padding: '0.35rem 0.6rem', borderRadius: '6px', cursor: 'pointer' },
+		previewBody: { background: 'rgba(0,0,0,0.35)', borderRadius: '8px', overflow: 'hidden', height: 'calc(88vh - 64px)' },
+		previewMedia: { display: 'block', width: '100%', height: '100%', objectFit: 'contain' }
 	};
 
 	return (
@@ -159,6 +184,9 @@ export default function DocumentUpload() {
 								</div>
 							</div>
 							<div style={styles.actions}>
+								<button style={styles.actionBtn} onClick={() => handlePreview(doc.id)}>
+									Preview
+								</button>
 								<button style={styles.actionBtn} onClick={() => handleDownload(doc.id)}>
 									<Download size={16} />
 								</button>
@@ -168,6 +196,28 @@ export default function DocumentUpload() {
 							</div>
 						</div>
 					))}
+				</div>
+			)}
+
+			{preview && (
+				<div style={styles.previewOverlay} onClick={closePreview}>
+					<div style={styles.previewCard} onClick={e => e.stopPropagation()}>
+						<div style={styles.previewHeader}>
+							<div>{preview.name}</div>
+							<button style={styles.closeBtn} onClick={closePreview}>Close</button>
+						</div>
+						<div style={styles.previewBody}>
+							{preview.type?.includes('pdf') ? (
+								<iframe title="Preview" src={preview.url} style={styles.previewMedia} />
+							) : preview.type?.startsWith('image/') ? (
+								<img alt={preview.name} src={preview.url} style={styles.previewMedia} />
+							) : (
+								<div style={{ padding: '1rem', color: '#D4B896' }}>
+									Preview not supported. <a href={preview.url} target="_blank" rel="noreferrer" style={{ color: '#C9943A' }}>Open in new tab</a>.
+								</div>
+							)}
+						</div>
+					</div>
 				</div>
 			)}
 		</div>
