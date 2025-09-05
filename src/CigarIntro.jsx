@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function CigarIntro({ onFinish, durationMs = 3500 }) {
+export default function CigarIntro({ onFinish, durationMs = 6500 }) {
 	const [visible, setVisible] = useState(true);
 
 	useEffect(() => {
@@ -19,6 +19,8 @@ export default function CigarIntro({ onFinish, durationMs = 3500 }) {
 				<div className="cigar" />
 				<div className="ember" />
 				<div className="smoke" />
+				<div className="smoke smoke2" />
+				<div className="smoke smoke3" />
 			</div>
 		</div>
 	);

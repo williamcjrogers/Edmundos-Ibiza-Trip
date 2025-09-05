@@ -16,46 +16,47 @@ code {
 .cigar-intro-overlay {
 	position: fixed;
 	inset: 0;
-	background: rgba(13, 8, 6, 0.92);
+	background: rgba(13, 8, 6, 0.94);
 	z-index: 9999;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	pointer-events: none;
+	animation: overlay-fade 6.5s ease forwards;
 }
 
 .cigar-path {
 	position: relative;
 	width: 100vw;
-	max-width: 640px;
-	height: 120px;
+	max-width: 760px;
+	height: 160px;
 	overflow: visible;
 }
 
 .cigar {
 	position: absolute;
-	left: -160px;
+	left: -220px;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 160px;
-	height: 30px;
-	border-radius: 18px;
-	background: linear-gradient(90deg, #3b2a22 0%, #5a3c2e 40%, #2b1b14 100%);
-	box-shadow: inset 0 0 8px rgba(0,0,0,0.6), 0 6px 18px rgba(0,0,0,0.45);
-	animation: cigar-slide 2.6s ease-out forwards;
+	width: 220px;
+	height: 44px;
+	border-radius: 22px;
+	background: linear-gradient(90deg, #3b2a22 0%, #6a4a3a 40%, #2b1b14 100%);
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.6), 0 10px 26px rgba(0,0,0,0.5);
+	animation: cigar-slide 5.2s ease-out forwards;
 }
 
 .ember {
 	position: absolute;
-	left: -10px;
+	left: -14px;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 18px;
-	height: 18px;
+	width: 26px;
+	height: 26px;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(255,120,50,0.9) 0%, rgba(255,60,0,0.8) 35%, rgba(120,20,0,0.1) 70%);
-	filter: blur(0.4px);
-	animation: ember-flicker 0.8s infinite alternate ease-in-out, ember-trail 2.6s ease-out forwards;
+	background: radial-gradient(circle, rgba(255,150,70,0.95) 0%, rgba(255,80,0,0.85) 35%, rgba(120,20,0,0.15) 70%);
+	filter: blur(0.6px);
+	animation: ember-flicker 1.2s infinite alternate ease-in-out, ember-trail 5.2s ease-out forwards;
 }
 
 .smoke {
@@ -68,30 +69,46 @@ code {
 	background: transparent;
 	box-shadow:
 		0 0 0 0 rgba(200,200,200,0.0),
-		40px -40px 18px 10px rgba(200, 200, 200, 0.05),
-		80px -80px 24px 14px rgba(210, 210, 210, 0.06),
-		120px -120px 30px 18px rgba(220, 220, 220, 0.07);
-	animation: smoke-rise 2.6s ease-out forwards;
+		50px -50px 24px 14px rgba(200, 200, 200, 0.06),
+		100px -110px 34px 20px rgba(210, 210, 210, 0.07),
+		150px -170px 44px 26px rgba(220, 220, 220, 0.08);
+	animation: smoke-rise 5.2s ease-out forwards;
+}
+.smoke2 {
+	filter: blur(1.2px);
+	opacity: 0.8;
+	animation-duration: 6.0s;
+}
+.smoke3 {
+	filter: blur(1.8px);
+	opacity: 0.6;
+	animation-duration: 6.8s;
 }
 
 @keyframes cigar-slide {
-	0% { transform: translate(-160px, -50%); opacity: 0; }
+	0% { transform: translate(-220px, -50%); opacity: 0; }
 	10% { opacity: 1; }
-	100% { transform: translate(calc(100vw - 160px), -50%); opacity: 1; }
+	100% { transform: translate(calc(100vw - 220px), -50%); opacity: 1; }
 }
 
 @keyframes ember-trail {
-	0% { transform: translate(-50%, -50%); opacity: 0.9; }
-	100% { transform: translate(calc(100vw - 160px - 50%), -50%); opacity: 0.6; }
+	0% { transform: translate(-50%, -50%); opacity: 0.95; }
+	100% { transform: translate(calc(100vw - 220px - 50%), -50%); opacity: 0.7; }
 }
 
 @keyframes ember-flicker {
-	0% { filter: blur(0.4px) brightness(1); box-shadow: 0 0 18px rgba(255,80,0,0.5); }
-	100% { filter: blur(0.8px) brightness(1.2); box-shadow: 0 0 28px rgba(255,120,0,0.7); }
+	0% { filter: blur(0.6px) brightness(1); box-shadow: 0 0 26px rgba(255,80,0,0.55); }
+	100% { filter: blur(1px) brightness(1.25); box-shadow: 0 0 40px rgba(255,120,0,0.75); }
 }
 
 @keyframes smoke-rise {
 	0% { opacity: 0.0; }
-	20% { opacity: 0.25; }
+	20% { opacity: 0.35; }
 	100% { opacity: 0.0; }
+}
+
+@keyframes overlay-fade {
+	0% { opacity: 1; }
+	85% { opacity: 1; }
+	100% { opacity: 0; }
 }
