@@ -4,18 +4,31 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './Login';
+import CigarIntro from './CigarIntro';
 
 function Root() {
   const [isAuthed, setIsAuthed] = useState(false);
+  const [showIntro, setShowIntro] = useState(false);
   useEffect(() => {
     setIsAuthed(localStorage.getItem('isAuthenticated') === 'true');
+    const seen = localStorage.getItem('seenCigarIntro') === 'true';
+    if (!seen) {
+      setShowIntro(true);
+    }
   }, []);
 
   if (!isAuthed) {
     return <Login onSuccess={() => setIsAuthed(true)} />;
   }
 
-  return <App />;
+  return (
+    <>
+      {showIntro && (
+        <CigarIntro onFinish={() => { localStorage.setItem('seenCigarIntro', 'true'); setShowIntro(false); }} />
+      )}
+      <App />
+    </>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
