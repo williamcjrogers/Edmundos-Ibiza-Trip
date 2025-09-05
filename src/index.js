@@ -11,11 +11,12 @@ function Root() {
   const [showIntro, setShowIntro] = useState(false);
   useEffect(() => {
     setIsAuthed(localStorage.getItem('isAuthenticated') === 'true');
-    const seen = localStorage.getItem('seenCigarIntro') === 'true';
-    if (!seen) {
+  }, []);
+  useEffect(() => {
+    if (isAuthed) {
       setShowIntro(true);
     }
-  }, []);
+  }, [isAuthed]);
 
   if (!isAuthed) {
     return <Login onSuccess={() => setIsAuthed(true)} />;
@@ -24,7 +25,7 @@ function Root() {
   return (
     <>
       {showIntro && (
-        <CigarIntro onFinish={() => { localStorage.setItem('seenCigarIntro', 'true'); setShowIntro(false); }} />
+        <CigarIntro onFinish={() => { setShowIntro(false); }} />
       )}
       <App />
     </>
