@@ -17,7 +17,9 @@ export default function CigarIntro({ onFinish, durationMs = 6500 }) {
 		<div className="cigar-intro-overlay">
 			<div className="cigar-path">
 				<div className="cigar">
-					<div className="cigar-band" />
+					<div className="cigar-band">
+						<div className="cigar-band-label">EDMUNDONS</div>
+					</div>
 					<div className="cigar-wrapper-lines" />
 					<div className="cigar-ash" />
 				</div>

@@ -61,6 +61,20 @@ code {
 	box-shadow: 0 0 6px rgba(201,148,58,0.5);
 }
 
+.cigar-band-label {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(-90deg);
+	transform-origin: center;
+	font-family: 'Playfair Display', Georgia, serif;
+	font-weight: 700;
+	font-size: 10px;
+	letter-spacing: 0.12em;
+	color: #4A2C1A;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+}
+
 .cigar-wrapper-lines {
 	position: absolute;
 	inset: 0;
