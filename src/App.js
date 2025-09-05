@@ -104,18 +104,7 @@ const IbizaItinerary = () => {
       position: 'relative',
       boxShadow: '0 4px 30px rgba(0,0,0,0.7)'
     },
-    churchill: {
-      position: 'absolute',
-      right: '2rem',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      width: '60px',
-      height: '60px',
-      opacity: 0.4,
-      background: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23C9943A' d='M50 10c-20 0-35 15-35 35s15 35 35 35c15 0 28-10 33-23l-5-3c-4 10-14 18-26 18-15 0-27-12-27-27s12-27 27-27c10 0 19 5 23 13l5-3C75 18 63 10 50 10z'/%3E%3C/svg%3E")`,
-      backgroundSize: 'contain',
-      backgroundRepeat: 'no-repeat'
-    },
+    churchill: { display: 'none' },
     title: {
       fontSize: '2.5rem',
       fontWeight: '700',
@@ -325,11 +314,10 @@ const IbizaItinerary = () => {
 
       {/* Header */}
       <div style={styles.header}>
-        <div style={styles.churchill} />
         <h1 style={styles.title}>{tripData.title}</h1>
         <button
           onClick={() => { localStorage.removeItem('isAuthenticated'); window.location.reload(); }}
-          style={{ position: 'absolute', left: '2rem', top: '2rem', ...styles.toggleButton }}
+          style={{ position: 'absolute', right: '1.25rem', top: '1.25rem', zIndex: 2, ...styles.toggleButton }}
         >
           Logout
         </button>
