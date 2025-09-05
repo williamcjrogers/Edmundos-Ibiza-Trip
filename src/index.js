@@ -12,6 +12,10 @@ function Root() {
   useEffect(() => {
     setIsAuthed(localStorage.getItem('isAuthenticated') === 'true');
   }, []);
+  // DEBUG: force-show intro on every page load
+  useEffect(() => {
+    setShowIntro(true);
+  }, []);
   useEffect(() => {
     if (isAuthed) {
       setShowIntro(true);

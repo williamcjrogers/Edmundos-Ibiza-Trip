@@ -25,6 +25,20 @@ code {
 	animation: overlay-fade 5s ease forwards;
 }
 
+.cigar-intro-overlay::after {
+	content: 'DEBUG: Intro Visible';
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	padding: 6px 10px;
+	border-radius: 6px;
+	background: rgba(255, 0, 0, 0.8);
+	color: #fff;
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	z-index: 10000;
+}
+
 .cigar-path {
 	position: relative;
 	width: 100vw;
